@@ -1,0 +1,255 @@
+/* ==========================================================================
+   WARBUD - shared design tokens & components
+   No gradients. No monospace. No numbered section badges.
+   ========================================================================== */
+
+:root{
+  --paper:#EDE7DA;
+  --paper-raised:#F6F2E8;
+  --ink:#221D17;
+  --ink-soft:#58514A;
+  --line:#DAD2BE;
+  --coal:#251E16;
+  --coal-raised:#302820;
+  --coal-line:rgba(237,231,218,0.14);
+  --chalk:#2B6470;
+  --chalk-bright:#3E8A98;
+  --ochre:#B8822E;
+  --ochre-dark:#93661F;
+  --ochre-bright:#D19C43;
+
+  --shadow-card:
+    0 1px 2px rgba(34,29,23,0.06),
+    0 14px 28px -18px rgba(34,29,23,0.28);
+  --shadow-card-hover:
+    0 2px 4px rgba(34,29,23,0.08),
+    0 22px 40px -18px rgba(184,130,46,0.3);
+  --ease-spring: cubic-bezier(.16,1,.3,1);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.font-display{
+  font-family:'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1.08;
+}
+
+::selection{ background:var(--ochre); color:#fff; }
+
+a, button{ -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--chalk);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+.hairline{ border-color:var(--line); }
+
+/* Grain texture (no gradients - pure SVG noise) --------------------------- */
+.grain{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0.05;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Drafting-grid texture for dark sections - SVG lines, not a CSS gradient */
+.blueprint-grid{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M40 0H0V40' fill='none' stroke='%23EDE7DA' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Standing-seam metal roofing texture - plain SVG ribs, not a CSS gradient */
+.metal-pattern{
+  pointer-events:none;
+  background-repeat:repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cline x1='0.5' y1='0' x2='0.5' y2='64' stroke='%23221D17' stroke-opacity='0.09' stroke-width='1'/%3E%3Cline x1='32.5' y1='0' x2='32.5' y2='64' stroke='%23221D17' stroke-opacity='0.045' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Buttons ------------------------------------------------------------------ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.55rem;
+  padding:0.95rem 1.7rem;
+  border-radius:0.6rem;
+  font-weight:600;
+  font-size:0.95rem;
+  white-space:nowrap;
+  transition:transform 220ms var(--ease-spring), box-shadow 220ms var(--ease-spring), background-color 220ms var(--ease-spring), color 220ms var(--ease-spring), border-color 220ms var(--ease-spring);
+}
+.btn-primary{
+  background:var(--ochre);
+  color:#fff8ef;
+  box-shadow:0 1px 0 rgba(255,255,255,0.14) inset, 0 14px 26px -12px rgba(184,130,46,0.55);
+}
+.btn-primary:hover{ background:var(--ochre-dark); transform:translateY(-2px); box-shadow:0 2px 4px rgba(34,29,23,0.14), 0 20px 32px -14px rgba(184,130,46,0.6); }
+.btn-primary:active{ transform:translateY(0); }
+.btn-ghost{
+  background:transparent;
+  color:var(--ink);
+  border:1.5px solid var(--ink);
+}
+.btn-ghost:hover{ background:var(--ink); color:var(--paper); transform:translateY(-2px); }
+.btn-ghost:active{ transform:translateY(0); }
+.btn-on-dark{
+  background:transparent;
+  color:#fff;
+  border:1.5px solid rgba(255,255,255,0.5);
+}
+.btn-on-dark:hover{ background:#fff; color:var(--coal); transform:translateY(-2px); }
+.btn-on-dark:active{ transform:translateY(0); }
+
+/* Cards ---------------------------------------------------------------- */
+.card{
+  background:var(--paper-raised);
+  border:1px solid var(--line);
+  border-radius:1rem;
+  box-shadow:var(--shadow-card);
+  transition:transform 280ms var(--ease-spring), box-shadow 280ms var(--ease-spring), border-color 280ms var(--ease-spring);
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-card-hover);
+  border-color:#D9BB8B;
+}
+.icon-ring{
+  width:3.25rem;
+  height:3.25rem;
+  border-radius:0.75rem;
+  background:var(--paper);
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--chalk);
+  flex-shrink:0;
+}
+.card-link-arrow{
+  display:inline-flex;
+  align-items:center;
+  gap:0.4rem;
+  font-size:0.85rem;
+  font-weight:600;
+  color:var(--ochre-dark);
+  margin-top:1rem;
+  transition:gap 220ms var(--ease-spring);
+}
+.card:hover .card-link-arrow{ gap:0.6rem; }
+
+/* Chalk-line signature device -------------------------------------------- */
+.chalk-line{ display:block; }
+.chalk-underline{
+  position:relative;
+  display:inline-block;
+}
+.chalk-underline svg{
+  position:absolute;
+  left:0; right:0; bottom:-0.3em;
+  width:100%;
+  height:0.5em;
+}
+
+/* Nav --------------------------------------------------------------------- */
+.nav-link{
+  position:relative;
+  color:var(--ink-soft);
+  font-weight:500;
+  font-size:0.95rem;
+  transition:color 200ms;
+}
+.nav-link::after{
+  content:'';
+  position:absolute;
+  left:0; right:0; bottom:-5px;
+  height:2px;
+  background:var(--chalk);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 260ms var(--ease-spring);
+}
+.nav-link:hover{ color:var(--ink); }
+.nav-link:hover::after{ transform:scaleX(1); }
+.nav-link.active{ color:var(--ink); }
+.nav-link.active::after{ transform:scaleX(1); }
+
+.nav-call{ display:inline-flex; }
+.nav-toggle{ display:none; color:var(--ink); background:var(--paper-raised); }
+.nav-toggle:hover{ background:var(--paper); }
+.mobile-menu{ display:none; }
+.menu-backdrop{ display:none; }
+@media (max-width: 767.98px){
+  .nav-call{ display:none; }
+  .nav-toggle{ display:inline-flex; }
+}
+.mobile-menu.open{ display:block; }
+.menu-backdrop.open{ display:block; }
+.mobile-nav-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.05rem 0.25rem;
+  border-bottom:1px solid var(--line);
+  font-weight:600;
+  font-size:1.05rem;
+  color:var(--ink);
+  transition:color 200ms;
+}
+.mobile-nav-link:last-child{ border-bottom:none; }
+.mobile-nav-link:active{ color:var(--ochre-dark); }
+
+/* Process steps (sequence encoded via connecting line, not digits) -------- */
+.step-icon{
+  width:3.5rem;
+  height:3.5rem;
+  border-radius:9999px;
+  background:var(--paper-raised);
+  border:1.5px solid var(--chalk);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--chalk);
+  position:relative;
+  z-index:1;
+}
+
+/* Dark surface cards -------------------------------------------------------- */
+.dark-card{
+  background:var(--coal-raised);
+  border:1px solid var(--coal-line);
+  transition:transform 320ms var(--ease-spring), border-color 320ms var(--ease-spring);
+}
+.dark-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(209,156,67,0.4);
+}
+
+/* Reveal on scroll ---------------------------------------------------------- */
+.reveal{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+}
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+/* Contact rows -------------------------------------------------------------- */
+.contact-row{
+  display:flex;
+  gap:1rem;
+  align-items:flex-start;
+}
